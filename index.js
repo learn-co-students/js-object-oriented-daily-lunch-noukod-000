@@ -22,6 +22,15 @@ function createNeighborhood(){
         customers(){
             return store.customers.filter(customer => customer.neighborhoodId === this.id);
         }
+        
+        meals(){
+            return this.deliveries().reduce(function(agg,deivery){
+                if(!agg.includes(deivery.meal())){
+                    return [...agg, deivery.meal()];
+                }
+                return agg;
+            },[])
+        }
     }
 }
 
@@ -42,6 +51,12 @@ function createCustomer(){
 
         meals(){
             return this.deliveries().map(delivery => delivery.meal());
+        }
+
+        totalSpent(){
+            return this.meals().reduce(function(total, meal){
+                return total + meal.price;
+            },0)
         }
     }
 }
@@ -64,6 +79,10 @@ function createMeal(){
 
         customers(){
             return this.deliveries().map(delivery => delivery.customer());
+        }
+
+        static byPrice(){
+            return [...store.meals].sort((meal1, meal2) => meal2.price - meal1.price);
         }
     }
 }
