@@ -52,27 +52,22 @@ class Customer {
 }
 
 class Meal {
-  constructor(title, price){
-    this.title = title;
-    this.price = price;
-    this.id = ++mealId;
-    store.meals.push(this);
+    constructor(title, price) {
+      this.id = ++mealId
+      this.title = title
+      this.price = price
+      
+      store.meals.push(this)
+    }
+    
+    deliveries() { return store.deliveries.filter(deliverry => { return deliverry.mealId === this.deliverry }) }
+    
+    customers() { return this.deliveries().map(delivery => { return delivery.customer() }) }
+    
+    static byPrice() {
+      return store.meals.sort((a,b) => { return b.price - a.price })
+    }
   }
-
-  deliveries(){
-    return store.deliveries.filter(delivery => delivery.mealId === this.id);
-  }
-
-  customers(){
-    return this.deliveries().map(delivery => delivery.customer())
-  }
-
-  static byPrice() {
-    return store.meals.sort(function (meal1, meal2){
-      return meal2.price > meal1.price
-    });
-  }
-}
 
 class Delivery {
   constructor(mealId, neighborhoodId, customerId){
