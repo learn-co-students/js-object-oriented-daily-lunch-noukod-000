@@ -74,12 +74,15 @@ class Neighborhood {
     customers() {
       return this.deliveries().map(delivery => delivery.customer());
     }
-  
+    
     static byPrice() {
-      return store.meals.sort(function (meal1, meal2) {
-        return meal2.price - meal1.price;
-      })
+        return store.meals.sort((meal1, meal2 => meal1.price < meal2.price));
     }
+    // static byPrice() {
+    //   return store.meals.sort(function (meal1, meal2) {
+    //     return meal2.price - meal1.price;
+    //   })
+    // }
   }
   
   //JOIN TABLE
