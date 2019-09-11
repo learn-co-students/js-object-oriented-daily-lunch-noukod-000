@@ -4,9 +4,8 @@ let Customer = createCustomer();
 let Meal = createMeal();
 let Delivery = createDelivery();
 
+let neighborhoodId = 0;
 function createNeighborhood(){
-    let neighborhoodId = 0;
-
     return class Neighborhood{
         constructor(name){
             this.name = name;
@@ -35,7 +34,6 @@ function createNeighborhood(){
 
 function createCustomer(){
     let CustomerId = 0;
-
     return class Customer{
         constructor(name, neighborhoodId){
             this.name = name;
